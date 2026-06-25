@@ -1,0 +1,1298 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HeartSync - Relationship Compatibility Calculator</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --primary:#ff6b81;
+    --secondary:#ff8fa3;
+    --glass:rgba(255,255,255,.12);
+    --glass-border:rgba(255,255,255,.2);
+    --text:#ffffff;
+    --radius:22px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    color:var(--text);
+    background:
+    linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+    overflow-x:hidden;
+}
+
+.background-orb{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(120px);
+    z-index:-1;
+}
+
+.orb-left{
+    width:350px;
+    height:350px;
+    background:rgba(255,255,255,.2);
+    top:-120px;
+    left:-120px;
+}
+
+.orb-right{
+    width:420px;
+    height:420px;
+    background:rgba(255,255,255,.15);
+    right:-150px;
+    bottom:-150px;
+}
+
+.hero{
+    min-height:70vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px 20px;
+}
+
+.hero-content{
+    max-width:850px;
+}
+
+.hero-badge{
+    display:inline-block;
+    padding:10px 18px;
+    border-radius:999px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.2);
+    backdrop-filter:blur(10px);
+    margin-bottom:24px;
+}
+
+.hero h1{
+    font-size:4rem;
+    line-height:1.1;
+    margin-bottom:18px;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+}
+
+.hero-button{
+    display:inline-block;
+    margin-top:30px;
+    padding:16px 28px;
+    border-radius:14px;
+    text-decoration:none;
+    color:white;
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.2);
+    backdrop-filter:blur(10px);
+    transition:.3s;
+}
+
+.hero-button:hover{
+    transform:translateY(-3px);
+}
+
+.container{
+    width:min(1250px,92%);
+    margin:auto;
+    padding-bottom:80px;
+}
+
+.glass-card{
+    background:var(--glass);
+    border:1px solid var(--glass-border);
+    backdrop-filter:blur(18px);
+    border-radius:var(--radius);
+    padding:32px;
+    box-shadow:
+    0 10px 40px rgba(0,0,0,.12);
+}
+
+.section-title{
+    font-size:1.9rem;
+    margin-bottom:25px;
+}
+
+.comparison-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+}
+
+.partner-panel{
+    background:rgba(255,255,255,.08);
+    border-radius:18px;
+    padding:24px;
+}
+
+.partner-panel h3{
+    margin-bottom:20px;
+}
+
+.field{
+    margin-bottom:18px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:8px;
+}
+
+.field input,
+.field select{
+    width:100%;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    padding:14px;
+    background:white;
+    color:#333;
+    font-size:15px;
+}
+
+.content-section{
+    margin-top:32px;
+}
+
+.section-divider{
+    height:1px;
+    background:rgba(255,255,255,.15);
+    margin:35px 0;
+}
+
+@media(max-width:900px){
+
+    .comparison-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:2.8rem;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="background-orb orb-left"></div>
+<div class="background-orb orb-right"></div>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<div class="hero-badge">
+❤️ HeartSync Compatibility Engine
+</div>
+
+<h1>
+Calculate how much are you both compatible to each other 😙❤️
+</h1>
+
+<p>
+Analyze food preferences, music taste, personality traits,
+birth dates and lifestyle choices to calculate a compatibility score
+based on actual overlap between two people.
+</p>
+
+<a href="#compatibility-form" class="hero-button">
+Start Compatibility Test
+</a>
+
+</div>
+
+</section>
+
+<div class="container">
+
+<form id="compatibility-form">
+
+<div class="glass-card">
+
+<h2 class="section-title">
+Partner Information
+</h2>
+
+<div class="comparison-grid">
+
+<div class="partner-panel">
+
+<h3>Partner 1</h3>
+
+<div class="field">
+<label>Name</label>
+<input
+type="text"
+id="p1-name"
+required
+>
+</div>
+
+<div class="field">
+<label>Age</label>
+<input
+type="number"
+id="p1-age"
+required
+>
+</div>
+
+<div class="field">
+<label>Date of Birth</label>
+<input
+type="date"
+id="p1-dob"
+required
+>
+</div>
+
+</div>
+
+<div class="partner-panel">
+
+<h3>Partner 2</h3>
+
+<div class="field">
+<label>Name</label>
+<input
+type="text"
+id="p2-name"
+required
+>
+</div>
+
+<div class="field">
+<label>Age</label>
+<input
+type="number"
+id="p2-age"
+required
+>
+</div>
+
+<div class="field">
+<label>Date of Birth</label>
+<input
+type="date"
+id="p2-dob"
+required
+>
+</div>
+
+</div>
+
+</div>
+
+<div class="section-divider"></div>
+<h2 class="section-title">
+Food Preferences
+</h2>
+
+<div class="comparison-grid">
+
+<div class="partner-panel">
+
+<h3>Partner 1 Favorite Foods</h3>
+
+<div class="food-grid">
+
+<label class="food-option">
+<select class="p1-food" data-food="Momos">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Momos
+</label>
+
+<label class="food-option">
+<select class="p1-food" data-food="Burger">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Burger
+</label>
+
+<label class="food-option">
+<select class="p1-food" data-food="Pasta">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Pasta
+</label>
+
+<label class="food-option">
+<select class="p1-food" data-food="Chole Bhature">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Chole Bhature
+</label>
+
+<label class="food-option">
+<select class="p1-food" data-food="Biryani">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Biryani
+</label>
+
+<label class="food-option">
+<select class="p1-food" data-food="Brownie">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Brownie
+</label>
+
+<label class="food-option">
+<select class="p1-food" data-food="Ice Cream">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Ice Cream
+</label>
+
+<label class="food-option">
+<select class="p1-food" data-food="Fries">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Fries
+</label>
+
+</div>
+
+</div>
+
+<div class="partner-panel">
+
+<h3>Partner 2 Favorite Foods</h3>
+
+<div class="food-grid">
+
+<label class="food-option">
+<select class="p2-food" data-food="Momos">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Momos
+</label>
+
+<label class="food-option">
+<select class="p2-food" data-food="Burger">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Burger
+</label>
+
+<label class="food-option">
+<select class="p2-food" data-food="Pasta">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Pasta
+</label>
+
+<label class="food-option">
+<select class="p2-food" data-food="Chole Bhature">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Chole Bhature
+</label>
+
+<label class="food-option">
+<select class="p2-food" data-food="Biryani">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Biryani
+</label>
+
+<label class="food-option">
+<select class="p2-food" data-food="Brownie">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Brownie
+</label>
+
+<label class="food-option">
+<select class="p2-food" data-food="Ice Cream">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Ice Cream
+</label>
+
+<label class="food-option">
+<select class="p2-food" data-food="Fries">
+<option value="Like">Like</option>
+<option value="Dislike">Dislike</option>
+<option value="Not tried yet">Not tried yet</option>
+</select>
+Fries
+</label>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section-divider"></div>
+
+<h2 class="section-title">
+Music Preferences
+</h2>
+
+<div class="comparison-grid">
+
+<div class="partner-panel">
+
+<h3>Partner 1</h3>
+
+<div class="music-list">
+
+<div class="field">
+<label>Desi Kalakaar</label>
+<select id="p1-song-1">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>Power</label>
+<select id="p1-song-2">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>Blinding Lights</label>
+<select id="p1-song-3">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>First Kiss</label>
+<select id="p1-song-4">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>Love Dose</label>
+<select id="p1-song-5">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>Gulabi Aankhen</label>
+<select id="p1-song-6">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>9</label>
+<select id="p1-song-7">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>Brown Rang</label>
+<select id="p1-song-8">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>Gods Plan</label>
+<select id="p1-song-9">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>Malang</label>
+<select id="p1-song-10">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+</div>
+
+</div>
+
+<div class="partner-panel">
+
+<h3>Partner 2</h3>
+
+<div class="music-list">
+
+<div class="field">
+<label>Desi Kalakaar</label>
+<select id="p2-song-1">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>Power</label>
+<select id="p2-song-2">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>Blinding Lights</label>
+<select id="p2-song-3">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>First Kiss</label>
+<select id="p2-song-4">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>Love Dose</label>
+<select id="p2-song-5">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>Gulabi Aankhen</label>
+<select id="p2-song-6">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>9</label>
+<select id="p2-song-7">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>Brown Rang</label>
+<select id="p2-song-8">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>Gods Plan</label>
+<select id="p2-song-9">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+<div class="field">
+<label>Malang</label>
+<select id="p2-song-10">
+<option>Like</option>
+<option>Dislike</option>
+<option>Not listened till now</option>
+</select>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section-divider"></div>
+
+<h2 class="section-title">
+Personality Preferences
+</h2>
+
+<div class="comparison-grid">
+
+<div class="partner-panel">
+
+<h3>Partner 1</h3>
+
+<div class="field">
+<label>Introvert / Extrovert</label>
+<select id="p1-personality">
+<option>Introvert</option>
+<option>Extrovert</option>
+</select>
+</div>
+
+<div class="field">
+<label>Tea / Coffee</label>
+<select id="p1-drink">
+<option>Tea</option>
+<option>Coffee</option>
+</select>
+</div>
+
+<div class="field">
+<label>Beach / Mountains</label>
+<select id="p1-travel">
+<option>Beach</option>
+<option>Mountains</option>
+</select>
+</div>
+
+<div class="field">
+<label>Movies / Books</label>
+<select id="p1-hobby">
+<option>Movies</option>
+<option>Books</option>
+</select>
+</div>
+
+<div class="field">
+<label>Night Owl / Early Bird</label>
+<select id="p1-sleep">
+<option>Night Owl</option>
+<option>Early Bird</option>
+</select>
+</div>
+
+</div>
+
+<div class="partner-panel">
+
+<h3>Partner 2</h3>
+
+<div class="field">
+<label>Introvert / Extrovert</label>
+<select id="p2-personality">
+<option>Introvert</option>
+<option>Extrovert</option>
+</select>
+</div>
+
+<div class="field">
+<label>Tea / Coffee</label>
+<select id="p2-drink">
+<option>Tea</option>
+<option>Coffee</option>
+</select>
+</div>
+
+<div class="field">
+<label>Beach / Mountains</label>
+<select id="p2-travel">
+<option>Beach</option>
+<option>Mountains</option>
+</select>
+</div>
+
+<div class="field">
+<label>Movies / Books</label>
+<select id="p2-hobby">
+<option>Movies</option>
+<option>Books</option>
+</select>
+</div>
+
+<div class="field">
+<label>Night Owl / Early Bird</label>
+<select id="p2-sleep">
+<option>Night Owl</option>
+<option>Early Bird</option>
+</select>
+</div>
+
+</div>
+
+</div>
+
+<button type="submit" class="hero-button" style="margin-top:35px;width:100%;">
+Calculate Compatibility
+</button>
+
+</div>
+
+<div id="results" class="glass-card" style="margin-top:30px;display:none;">
+
+<h2 class="section-title">
+Compatibility Results
+</h2>
+
+<div id="overall-score" style="font-size:4rem;font-weight:700;text-align:center;">
+0%
+</div>
+
+<div class="breakdown-grid">
+
+<div class="breakdown-item">
+<span>Food Compatibility</span>
+<span id="food-score">0%</span>
+</div>
+
+<div class="breakdown-item">
+<span>Music Compatibility</span>
+<span id="music-score">0%</span>
+</div>
+
+<div class="breakdown-item">
+<span>Personality Compatibility</span>
+<span id="personality-score">0%</span>
+</div>
+
+<div class="breakdown-item">
+<span>Birth Date Compatibility</span>
+<span id="birth-score">0%</span>
+</div>
+
+</div>
+
+<div class="shared-list">
+<h3>Compatibility Message</h3>
+<div id="compatibility-message"></div>
+<div id="special-link" style="margin-top:12px; display:none;">
+<div style="margin-bottom:8px; color:#fff; font-weight:600;">
+Special compatibility surprise
+</div>
+<iframe id="special-iframe" src="" style="width:80%; max-width:100%; min-height:360px; border:0; border-radius:16px; display:block; margin:0 auto;" allow="autoplay; fullscreen"></iframe>
+<div id="special-fallback" style="margin-top:10px; display:none; color:#fff;">
+If the content doesn't load here, you can still open the resource in a new tab: https://pin.it/4KbTP2cbK
+</div>
+</div>
+</div>
+<style>
+
+.food-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.food-option{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:12px;
+    border-radius:12px;
+    background:rgba(255,255,255,.08);
+}
+
+.breakdown-grid{
+    display:grid;
+    gap:12px;
+    margin-top:20px;
+}
+
+.breakdown-item{
+    display:flex;
+    justify-content:space-between;
+    padding:14px;
+    border-radius:12px;
+    background:rgba(255,255,255,.08);
+}
+
+</style>
+
+<script>
+
+const form = document.getElementById("compatibility-form");
+const results = document.getElementById("results");
+
+const songs = [
+    "Desi Kalakaar",
+    "Power",
+    "Blonding Lights",
+    "First Kiss",
+    "Love Dose",
+    "Gulabi Aankhen",
+    "9",
+    "Brown Rang",
+    "Gods Plan",
+    "Malang"
+];
+
+function getSelectedFoods(selector){
+    return [...document.querySelectorAll(selector)]
+        .map(item => item.value);
+}
+
+function calculateFoodMatch(){
+    const p1Els = [...document.querySelectorAll('.p1-food')];
+    const p2Els = [...document.querySelectorAll('.p2-food')];
+
+    const p1Opinions = {};
+    p1Els.forEach(el => { p1Opinions[el.dataset.food] = el.value; });
+
+    const p2Opinions = {};
+    p2Els.forEach(el => { p2Opinions[el.dataset.food] = el.value; });
+
+    const allFoods = new Set([...Object.keys(p1Opinions), ...Object.keys(p2Opinions)]);
+
+    const considered = [...allFoods].filter(food =>
+        (p1Opinions[food] && p1Opinions[food] !== 'Not tried yet') ||
+        (p2Opinions[food] && p2Opinions[food] !== 'Not tried yet')
+    );
+
+    const shared = considered.filter(food =>
+        p1Opinions[food] === 'Like' && p2Opinions[food] === 'Like'
+    );
+
+    const score = considered.length === 0 ? 0 : Math.round((shared.length / considered.length) * 100);
+
+    return {
+        score,
+        shared
+    };
+}
+
+function calculateMusicMatch(){
+
+    let matches = 0;
+    let sharedSongs = [];
+
+    for(let i=1;i<=10;i++){
+
+        const p1 =
+            document.getElementById(
+                `p1-song-${i}`
+            ).value;
+
+        const p2 =
+            document.getElementById(
+                `p2-song-${i}`
+            ).value;
+
+        if(p1 === p2 && p1 !== 'Not listened till now'){
+            matches++;
+            sharedSongs.push(
+                songs[i - 1]
+            );
+        }
+
+    }
+
+    return {
+        score:
+            Math.round(
+                (matches / 10) * 100
+            ),
+        sharedSongs
+    };
+}
+
+function calculatePersonalityMatch(){
+
+    const pairs = [
+
+        [
+            "p1-personality",
+            "p2-personality"
+        ],
+
+        [
+            "p1-drink",
+            "p2-drink"
+        ],
+
+        [
+            "p1-travel",
+            "p2-travel"
+        ],
+
+        [
+            "p1-hobby",
+            "p2-hobby"
+        ],
+
+        [
+            "p1-sleep",
+            "p2-sleep"
+        ]
+
+    ];
+
+    let matches = 0;
+
+    pairs.forEach(pair => {
+
+        const p1 =
+            document.getElementById(
+                pair[0]
+            ).value;
+
+        const p2 =
+            document.getElementById(
+                pair[1]
+            ).value;
+
+        if(p1 === p2){
+            matches++;
+        }
+
+    });
+
+    return Math.round(
+        (matches / pairs.length) * 100
+    );
+}
+
+function getZodiacSign(dateString){
+
+    const date =
+        new Date(dateString);
+
+    const day =
+        date.getDate();
+
+    const month =
+        date.getMonth() + 1;
+
+    if((month==3&&day>=21)||(month==4&&day<=19))
+        return "Aries";
+
+    if((month==4&&day>=20)||(month==5&&day<=20))
+        return "Taurus";
+
+    if((month==5&&day>=21)||(month==6&&day<=20))
+        return "Gemini";
+
+    if((month==6&&day>=21)||(month==7&&day<=22))
+        return "Cancer";
+
+    if((month==7&&day>=23)||(month==8&&day<=22))
+        return "Leo";
+
+    if((month==8&&day>=23)||(month==9&&day<=22))
+        return "Virgo";
+
+    if((month==9&&day>=23)||(month==10&&day<=22))
+        return "Libra";
+
+    if((month==10&&day>=23)||(month==11&&day<=21))
+        return "Scorpio";
+
+    if((month==11&&day>=22)||(month==12&&day<=21))
+        return "Sagittarius";
+
+    if((month==12&&day>=22)||(month==1&&day<=19))
+        return "Capricorn";
+
+    if((month==1&&day>=20)||(month==2&&day<=18))
+        return "Aquarius";
+
+    return "Pisces";
+}
+
+function calculateBirthCompatibility(){
+
+    const age1 =
+        parseInt(
+            document.getElementById(
+                "p1-age"
+            ).value
+        );
+
+    const age2 =
+        parseInt(
+            document.getElementById(
+                "p2-age"
+            ).value
+        );
+
+    const dob1 =
+        document.getElementById(
+            "p1-dob"
+        ).value;
+
+    const dob2 =
+        document.getElementById(
+            "p2-dob"
+        ).value;
+
+    let score = 50;
+
+    const gap =
+        Math.abs(age1 - age2);
+
+    if(gap <= 2){
+        score += 30;
+    }
+    else if(gap <= 5){
+        score += 20;
+    }
+    else if(gap <= 8){
+        score += 10;
+    }
+
+    const zodiacPairs = {
+
+        Aries:["Leo","Sagittarius"],
+        Taurus:["Virgo","Capricorn"],
+        Gemini:["Libra","Aquarius"],
+        Cancer:["Scorpio","Pisces"],
+        Leo:["Aries","Sagittarius"],
+        Virgo:["Taurus","Capricorn"],
+        Libra:["Gemini","Aquarius"],
+        Scorpio:["Cancer","Pisces"],
+        Sagittarius:["Aries","Leo"],
+        Capricorn:["Taurus","Virgo"],
+        Aquarius:["Gemini","Libra"],
+        Pisces:["Cancer","Scorpio"]
+
+    };
+
+    const sign1 =
+        getZodiacSign(dob1);
+
+    const sign2 =
+        getZodiacSign(dob2);
+
+    if(
+        zodiacPairs[sign1]
+        ?.includes(sign2)
+    ){
+        score += 20;
+    }
+
+    return Math.min(score,100);
+}
+
+function compatibilityMessage(score){
+
+    if(score >= 90){
+        return "Exceptional compatibility. You share many interests and lifestyle preferences.";
+    }
+
+    if(score >= 75){
+        return "Strong compatibility with plenty of common ground.";
+    }
+
+    if(score >= 60){
+        return "A healthy balance of similarities and differences.";
+    }
+
+    if(score >= 45){
+        return "Moderate compatibility. Communication and understanding will matter.";
+    }
+
+    return "You have different preferences, but relationships often grow through mutual respect and effort.";
+}
+
+function animateScore(target){
+
+    const scoreElement =
+        document.getElementById(
+            "overall-score"
+        );
+
+    let current = 0;
+
+    const timer =
+        setInterval(() => {
+
+            current++;
+
+            scoreElement.textContent =
+                `${current}%`;
+
+            if(current >= target){
+                clearInterval(timer);
+            }
+
+        },15);
+
+}
+
+form.addEventListener(
+    "submit",
+    function(event){
+
+        event.preventDefault();
+
+        const food =
+            calculateFoodMatch();
+
+        const music =
+            calculateMusicMatch();
+
+        const personality =
+            calculatePersonalityMatch();
+
+        const birth =
+            calculateBirthCompatibility();
+
+        const finalScore =
+            Math.round(
+                food.score * 0.20 +
+                music.score * 0.30 +
+                personality * 0.35 +
+                birth * 0.15
+            );
+
+        document.getElementById(
+            "food-score"
+        ).textContent =
+            `${food.score}%`;
+
+        document.getElementById(
+            "music-score"
+        ).textContent =
+            `${music.score}%`;
+
+        document.getElementById(
+            "personality-score"
+        ).textContent =
+            `${personality}%`;
+
+        document.getElementById(
+            "birth-score"
+        ).textContent =
+            `${birth}%`;
+
+        document.getElementById(
+            "compatibility-message"
+        ).textContent =
+            compatibilityMessage(
+                finalScore
+            );
+
+        const specialLink =
+            document.getElementById(
+                "special-link"
+            );
+
+        const specialIframe =
+            document.getElementById(
+                "special-iframe"
+            );
+
+        const specialFallback =
+            document.getElementById(
+                "special-fallback"
+            );
+
+        if(finalScore > 90){
+            specialIframe.src =
+                "https://pin.it/4KbTP2cbK";
+            specialFallback.style.display =
+                "none";
+            specialLink.style.display =
+                "block";
+        } else {
+            specialIframe.src = "";
+            specialLink.style.display =
+                "none";
+        }
+
+        results.style.display =
+            "block";
+
+        animateScore(
+            finalScore
+        );
+
+        results.scrollIntoView({
+            behavior:"smooth"
+        });
+
+    }
+);
+
+</script>
+
+</form>
+
+</div>
+
+</body>
+</html>
